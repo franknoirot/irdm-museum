@@ -19,8 +19,8 @@ description: > # this means to ignore newlines until "baseurl:"
   A mockup of the Iridium Museum microsite.
 
   built using Jekyll by Frank Johnson, 2019
-baseurl: "" # the subpath of your site, e.g. /blog
-url: ""
+baseurl: "/irdm-museum" # the subpath of your site, e.g. /blog
+url: "https://franknoirot.co"
 
 excerpt_separator: <!--more-->
 
