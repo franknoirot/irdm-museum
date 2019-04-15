@@ -1,0 +1,21 @@
+---
+title: The Iridium Museum
+layout: page
+---
+<main>
+    {% include timeline.html %}
+    <section id="exhibits--section">
+        <h2>Exhibits</h2>
+        {% for exhibit in site.exhibits %}        
+        <a class="exhibit--link" href="{{ exhibit.url }}">
+            <article id="exhibit-{{ forloop.index }}" class="exhibit--card">
+                <img class="exhibit--img" src="/assets/img/{{ exhibit.cardImg }}">
+                <div>
+                    <h2 class='exhibit--title'>{{exhibit.title}}</h2>
+                    <div class="exhibit--excerpt">{{ exhibit.excrpt }}</div>
+                </div>
+            </article>
+        </a>
+        {% endfor %}
+    </section>
+</main>
