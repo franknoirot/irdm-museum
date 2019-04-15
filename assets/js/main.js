@@ -60,7 +60,7 @@ window.addEventListener('load', () => {
                  .attr('transform-origin', `${width/2}px ${height/2}px`)
                  .call(tip);
     
-    d3.csv("/assets/iridium-timline_event-data.csv", (err, data) => {
+    d3.csv(baseurl+"/assets/iridium-timline_event-data.csv", (err, data) => {
         if (err) throw err;
 
         data.forEach(item => item.date = new Date(item.date)); // make date attr a proper Date object
