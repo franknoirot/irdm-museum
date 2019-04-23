@@ -1,10 +1,33 @@
 // Sets up an interactive timeline using d3.js and d3-tip.js
 
+let fullscreenElem = (elem) => {
+    let evt = this.event;
+    console.log(evt, elem);
+
+    if (evt.target.classList.contains('active')) {
+        elem.parentNode.style.height = "initial";
+        elem.parentNode.style.width = "initial";
+        window.scroll(0, 0);
+        evt.target.classList.remove('active');
+        evt.target.innerHTML = "Fullscreen";
+    } else {
+        elem.parentNode.style.height = "100vh";
+        elem.parentNode.style.width = "100vw";
+        window.scroll(0, elem.getBoundingClientRect().top);
+        evt.target.classList.add('active');
+        evt.target.innerHTML = "Normal View";
+    }
+    
+};
+
 window.addEventListener('load', () => {
     // viewBox dimensions - svg's actual width & height set in css
     let width = 1000;
     let height = 200;
     let margin = width*.05;
+
+    // add event listener to fullscreen button
+    document.getElementById('timeline-btn--fullscreen').addEventListener('click', fullscreenElem.bind(this, document.getElementById('timeline')));
 
     // helper functions
     let parseTime = d3.timeParse('%b/%d/%y');
@@ -69,7 +92,7 @@ window.addEventListener('load', () => {
             label.addEventListener('click', updateTimeline);
         });
 
-        elem.parentNode.insertBefore(catToggles, elem.nextSibling);
+        elem.appendChild(catToggles, elem.nextSibling);
     };
 
     // set up d3 timeline
@@ -119,7 +142,7 @@ window.addEventListener('load', () => {
                             .append('g')
                             .attr('id', (d,i) => 'time-event--' + i);
         
-        const vUnit = 25; // unit length of timeline arm
+        const vUnit = 18; // unit length of timeline arm
 
         // gets a y value for line or circle of a timeline event
         // moves further out from the timeline center based on crowdedness
@@ -152,13 +175,12 @@ window.addEventListener('load', () => {
              .attr('stroke', d => colorScale(d.category))
              .attr('class', d => d.category + " time-event");
 
-
-
         evtGs.append('circle')
             .attr('id', (d,i) => 'circ--'+i)
             .attr('r', radius)
             .attr('cx', d => timeScale(d.date))
             .attr('cy', (d,i) => getY(d,i, 'circ--'))
+            .attr('stroke', (d,i) => (d.featured === 'y') ? "black" : "none")
             .attr('fill', d => colorScale(d.category))
             .attr('class', d => d.category + " time-event")
             .attr('transform-origin', d => `${timeScale(d.date)}px ${height/2}`)
