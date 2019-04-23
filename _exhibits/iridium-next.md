@@ -1,6 +1,6 @@
 ---
 layout: exhibit
-title: Iridium NEXT
+title: Iridium Launch Programs
 cardImg: img_iridium-next-card.jpg
 ftrImg: img_iridium-next-feature.jpg
 excrpt: Turns out launching a new constellation of sixty six satellites while maintaining the existing one is really hard. Follow the story of how with a little luck and a lot of engineering Iridium underwent the largest technology upgrade in history.

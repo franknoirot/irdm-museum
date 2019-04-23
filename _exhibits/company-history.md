@@ -1,8 +1,7 @@
 ---
 layout: exhibit
-title: '#flarewell'
-cardImg: img_flarewell-card.jpg
-ftrImg: img_flarewell-card.jpg
+title: 'Company History'
+cardImg: 
 excrpt: Iridium's first constellation had a quirk that turned into a phenomenon. Find out how satellites became artificial shooting stars that inspired a generation.
 ---
 In the late 1990s, Iridium launched a constellation of 66 satellites into space, paving the way for the future of satellite communications. From Earth, unexpected reminders of the constellation’s presence appeared – Iridium Flares, a streak of light in the sky caused by sunlight reflecting off the main mission antenna of an Iridium® satellite. These Flares, which could be seen anywhere in the world, inspired a generation of global sky-watchers and created a cultural phenomenon. Over the years, “Flare-catchers” dedicated websites and social media accounts to tracking each of the Iridium satellites as they flashed across the sky.
