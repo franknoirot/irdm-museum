@@ -7,16 +7,13 @@ permalink: /
     {% include timeline.html %}
     <section id="exhibits--section">
         <h2>Exhibits</h2>
-        {% for exhibit in site.exhibits %}        
-        <a class="exhibit--link" href="{{ exhibit.url | relative_url }}">
-            <article id="exhibit-{{ forloop.index }}" class="exhibit--card">
-                <img class="exhibit--img" src="{{ site.baseurl }}/assets/img/{{ exhibit.cardImg }}">
-                <div>
-                    <h2 class='exhibit--title'>{{exhibit.title}}</h2>
-                    <div class="exhibit--excerpt">{{ exhibit.excrpt }}</div>
-                </div>
-            </article>
-        </a>
-        {% endfor %}
+        <div class="exhibits--grid">
+            {% for exhibit in site.exhibits %}        
+            <a id="exhibit-{{ forloop.index }}" href="{{ exhibit.url | relative_url }}" class="exhibit--card">
+                {% if exhibit.cardImg != "" %}<img class="exhibit--img" src="{{ site.baseurl }}/assets/img/{{ exhibit.cardImg }}">{% endif %}
+                <h2 class='exhibit--title'>{{exhibit.title}}</h2>
+            </a>
+            {% endfor %}
+        </div>
     </section>
 </main>

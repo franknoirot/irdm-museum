@@ -38,6 +38,8 @@ body {
     margin: 0;
 }
 
+main { width: 100%; }
+
 /* timeline */
 
 #timeline--section {
@@ -114,69 +116,78 @@ nav#cat-filters {
 }
 
 /* EXHIBITS */
-.exhibits--section {
+#exhibits--section { width: 100%; }
+
+.exhibits--grid {
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 2vmin;
     border-top: solid var(--light) 1px;
 }
 
-.exhibit--link {
+a.exhibit--card {
     text-decoration: none;
     color: inherit;
-}
-
-.exhibit--card {
     width: 100%;
-    height: 20vh;
+    height: 100%;
+    min-height: 20vmin;
     display: flex;
     align-items: center;
+    justify-content: center;
     position: relative;
-    box-sizing: border-box;
+    background: #33393e;
+    box-shadow: 0 0 0 rgba(255,255,255,0.5);
+    transition: transform .2s, box-shadow 0.25s ease-in;
 }
 
 .exhibit--card:not(first-of-type) {
     margin-top: 2vh;
 }
 
-.exhibit--card::before, .exhibit--card::after {
-    --line-height: 2px;
+.exhibit--card:hover {
+    transform: translate(0,-4px);
+    box-shadow: 0 5px 3px rgba(0,0,0,0.08); 
+}
+
+.exhibit--card::after {
     content: '';
     position: absolute;
+    top: 0;
     left: 0;
-    height: var(--line-height);
-    width: 0;
-    background: linear-gradient(to right, white, var(--light));
-    z-index: -1;
-    transition: width .3s ease-in-out;
-}
-
-.exhibit--card::before {
-    top: calc(-1*var(--line-height));
-}
-.exhibit--card::after {
-    bottom: calc(-1*var(--line-height));
-}
-
-.exhibit--card:hover::before, .exhibit--card:hover::after {
     width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    opacity: 0;
+    z-index: 2;
+    transition: opacity .2s;
+}
+
+.exhibit--card:hover::after, .exhibit--card:hover .exhibit--title {
+    opacity: 1;
 }
 
 .exhibit--title {
-    font-size: 1.8em;
+    font-size: 2.1em;
+    font-size: calc(1.1em + .8vmin);
+    text-align: center;
     margin: 0;
+    color: white;
+    z-index: 3;
+    opacity: 0;
 }
 
 .exhibit--img {
-    float: left;
-    width: 25%;
-    max-width: 25%;
-    height: 100%;
+    position: absolute;
+    width: 100%;
+    max-height: 100%;
     object-fit: cover;
-    margin-right: 2em;
-    border: solid 1px var(--light-gray);
-    background: #33393e;
+    left: 0;
+    top: 0;
 }
-
-.exhibit--excerpt {}
 
 footer {
     margin: 5vmin 0 1vmin 0;
