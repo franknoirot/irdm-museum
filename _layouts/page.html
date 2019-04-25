@@ -7,10 +7,11 @@
     <title>{{ site.title }}</title>
     <link rel="stylesheet" href="https://use.typekit.net/zfu4ccz.css">
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/main.css">
+    {% if page.layout == 'exhibit' %}<link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/exhibit.css">{% endif %}
 </head>
 <body>
     <header>
-        <h1 class='site-title'>{{ page.title }}</h1>
+        <h1 class='site-title'>{{ site.title }}</h1>
         <img class='site-img' src="{{ site.baseurl }}/assets/img/img_site-logo.png">
     </header>
     {{ content }}
