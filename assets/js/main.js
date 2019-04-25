@@ -100,7 +100,8 @@ window.addEventListener('load', () => {
                 .attr('viewBox', `0 0 ${width} ${height}`)
                 .call(d3.zoom().on("zoom", function () {    // makes timeline zoomable
                     svg.attr("transform", `translate(${d3.event.transform.x},0) scale(${ d3.event.transform.k })`);
-                    svg.selectAll("circle").attr('r', Math.max(3-(d3.event.transform.k-1)/6, 1)); // applies additional scaling circles on zoom
+                    svg.selectAll("circle.time-event").attr('r', Math.max(3-(d3.event.transform.k-1)/6, 1)); // applies additional scaling circles on zoom
+                    // svg.selectAll("line.time-event").attr('y2', Math.max(vUnit-(d3.event.transform.k-1)/6, 1)); // applies additional scaling circles on zoom
                  }))
                  .append("g")
                  .attr('transform', `translate(${margin} 0)`)
@@ -140,7 +141,8 @@ window.addEventListener('load', () => {
                             .data(sorted)
                             .enter()
                             .append('g')
-                            .attr('id', (d,i) => 'time-event--' + i);
+                            .attr('id', (d,i) => 'time-event--' + i)
+                            .attr('class', d => `${d.category}${(d.featured === "y") ? " featured" : ""}`);;
         
         const vUnit = 18; // unit length of timeline arm
 
@@ -173,18 +175,34 @@ window.addEventListener('load', () => {
              .attr('x2', d => timeScale(d.date))
              .attr('y2', (d,i) => getY(d,i, 'line--'))
              .attr('stroke', d => colorScale(d.category))
-             .attr('class', d => d.category + " time-event");
+             .attr('class', d => `${d.category} time-event${(d.featured === "y") ? " featured" : ""}`)
+             .attr('transform-origin', d => `${timeScale(d.date)}px ${height/2}`);
 
-        evtGs.append('circle')
+        let circs = evtGs.append('circle')
             .attr('id', (d,i) => 'circ--'+i)
             .attr('r', radius)
             .attr('cx', d => timeScale(d.date))
             .attr('cy', (d,i) => getY(d,i, 'circ--'))
             .attr('stroke', (d,i) => (d.featured === 'y') ? "black" : "none")
             .attr('fill', d => colorScale(d.category))
-            .attr('class', d => d.category + " time-event")
+            .attr('class', d => `${d.category} time-event`)
             .attr('transform-origin', d => `${timeScale(d.date)}px ${height/2}`)
             .on('mouseover', tip.show)
             .on('mouseout', tip.hide);
+
+        // evtGs.selectAll('g.featured circle').remove();
+        
+        // const cardW = 15;
+        // let featured = events.selectAll('g.featured');
+        // console.log(featured);
+
+        //     featured.append('rect')
+        //     .attr('x', d => timeScale(d.date) - cardW/2)
+        //     .attr('y', height/2 - cardW)
+        //     .attr('width', cardW)
+        //     .attr('height', cardW)
+        //     .attr('fill', d => colorScale(d.category))
+        //     .attr('transform-origin', d => `${timeScale(d.date)}px ${height/2}`)
+
     });
 });
